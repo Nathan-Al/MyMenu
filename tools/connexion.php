@@ -8,10 +8,10 @@ class connexionPDO
 {
     function connexionPDO()
     {
-        $login = "selinarius";
-        $mdp = "007007";
-        $bd = "DeusExmenu";
-        $serveur = "localhost";
+        $login = "";
+        $mdp = "";
+        $bd = "";
+        $serveur = "";
         try{
             $conn = new PDO ('mysql:host='.$serveur.';dbname='.$bd.";",$login ,$mdp );
             return $conn;
