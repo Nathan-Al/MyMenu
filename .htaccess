@@ -1,0 +1,9 @@
+RewriteEngine On # Activer le module Rewrite
+Options +FollowSymlinks
+RewriteBase /project/ApiRest/
+RewriteRule ^test/([a-zA-Z]+)$ tools/test.php?name_ent=$1
+RewriteRule ^ask/([a-z]+)/([a-z]+)/([a-zA-Z\ 1-99999]+)$ index.php?page=$1&action=$2&element=$3
+RewriteRule ^ask/compte/([a-z]+)$ index.php?action=$1
+
+ErrorDocument 404 /project/ApiRest/error/index.php index.php?404
+#RewriteRule (https?:\/\/|wwww\.)[a-zA-Z0-9-_\.\/\?=&]+
