@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-class requestDelController
+class RequestDelController
 {
     
 }

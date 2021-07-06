@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-class requestPutController
+class RequestPutController
 {
     
 }
