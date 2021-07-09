@@ -2,47 +2,63 @@
 
 namespace Controller;
 
+require './Model/entreprise/manager/entrepriseManager.php';
+//require './Model/connexion.php';
+
 use Model\ClassModel\Entreprise;
 use Model\ManagerModel\ManagerEntreprise;
-use Tools\connexionPDO;
+//use Model\connexionPDO;
 
 /**
  * Entreprise Handle Datas
  */
-class EntrepriseController extends Entreprise
+class EntrepriseController
 {
-    private $_pdo;
-
     /**
      * Datas treatment
      * 
-     * @param name $name Entreprise name
+     * @param data $data Entreprise data
      * 
      * @return array|boolean
      */
-    function traitement($name)
+    function traitement($data,$action,$database)
     {
-        $this->_pdo = new connexionPDO();
-        $database = $this->_pdo->connexionPDO();
+        $MnEntreprise = New ManagerEntreprise($database);
+        if($action === 'read')
+            $entreprise = $MnEntreprise->getSelect($data);
+        else if ($action === 'readall')
+            $entreprise = $MnEntreprise->getAll($data);
+        else if($action === 'insert')
+        {
+            $result = [];
+            foreach ($data->data as $key => $value) {
+                $produit = new Entreprise(
+                    0,
+                    $value->name,
+                    $value->horaire,
+                    $value->localisation,
+                    $value->gpsX,$value->gpsY,
+                    $value->siren
+                );
+                $result[] = $MnEntreprise->insert($produit);
+            }
+            $i = 0;
+            $t = 0;
+            while ($i < sizeof($result))
+            {
+                if($result[$i]===true)
+                {
+                    $t++;
+                }
+                $i++;
+            }
 
-        $MnCategorie = New ManagerEntreprise($database);
-        $entreprise = $MnCategorie->getSelect($name);
-
-        //Verififcations que le retour ne sois pas vide
-        if (gettype($entreprise)=="object") {
-            $tab_entreprise = [
-                "id"=>$entreprise->getId(),
-                "nom"=>$entreprise->getNom(),
-                "horaire"=>$entreprise->getHoraire(),
-                "localisation"=>$entreprise->getLocalisation(),
-                "gpsX"=>$entreprise->getGpsX(),
-                "gpsY"=>$entreprise->getGpsY(),
-                "siren"=>$entreprise->getSiren(),
-                "link"=>["update"=>"liens/update/id"]
-            ];
-            return $tab_entreprise;
-        } else {
-            return false;
+            if($t === sizeof($result))
+                return $result;
+            else 
+                return false;
         }
+
+        return $entreprise;
     }
 }

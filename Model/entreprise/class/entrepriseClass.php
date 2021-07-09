@@ -2,15 +2,17 @@
 
 namespace Model\ClassModel;
 
-class Entreprise
+use JsonSerializable;
+
+class Entreprise implements JsonSerializable
 {
-    protected $id;
-    protected $nom;
-    protected $horaire;
-    protected $localisation;
-    protected $gpsX;
-    protected $gpsY;
-    protected $siren;
+    private $id;
+    private $nom;
+    private $horaire;
+    private $localisation;
+    private $gpsX;
+    private $gpsY;
+    private $siren;
 
     public function __construct($id,$nom,$horaire,$localisation,$gpsX,$gpsY,$siren)
     {
@@ -47,7 +49,6 @@ class Entreprise
         return $this->horaire =$horaire;
     }
 
-
     public function getLocalisation(){
         return $this->localisation;
     }
@@ -64,7 +65,6 @@ class Entreprise
         return $this->gpsX = $gpsX;
     }
 
-
     public function getGpsY(){
         return $this->gpsY;
     }
@@ -73,13 +73,26 @@ class Entreprise
         return $this->gpsY = $gpsY;
     }
 
-
     public function getSiren(){
         return $this->siren;
     }
 
     public function setSiren($siren){
         return $this->siren = $siren;
+    }
+
+    public function jsonSerialize()
+    {
+        return 
+        [
+            'id'   => $this->getId(),
+            'name' => $this->getNom(),
+            'horaire' => $this->getHoraire(),
+            'localisation' => $this->getLocalisation(),
+            'gpsX' => $this->getGpsX(),
+            'gpsY' => $this->getGpsY(),
+            'siren' => $this->getSiren()
+        ];
     }
 }
 ?>

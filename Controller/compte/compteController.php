@@ -2,7 +2,8 @@
 
 namespace Controller;
 
-class RequestPostController
+
+class CompteController
 {
 
 }

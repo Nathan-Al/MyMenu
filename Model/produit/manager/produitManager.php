@@ -9,60 +9,63 @@ class ManagerProduit
     private $connexion;
     public $entreprise;
     public $id;
-    public $nom;
 
     public function __construct($db){
         $this->connexion = $db;
     }
 
+    /**
+     * Verify that a entry exist in the database
+     * 
+     * @param string $conditions
+     */
     public function AlreadyExist($conditions)
     {
-        //echo "Data : ".$data." Identifiant : ".$search_for."<br>";
         $requette = "select `id_prod` FROM `produit` WHERE ".$conditions;
-        #echo $requette;
         $reponse  = $this->connexion->prepare($requette);
         $reponse->execute();
         $donnees=$reponse->fetch();
-        #echo "Donnes : ".var_dump($donnees)." type = ".gettype($donnees)."<br>";
+
         if(gettype($donnees)=="boolean" && $donnees==false)
         {
-            #echo "exist non<br>"; 
             return false;
         }
         else if(gettype($donnees)=="array")
         {
-            #echo "exist oui<br>"; 
             return true;
         }    
     }
 
     public function getAll()
     {
-            $requette = "select * FROM `produit` ;";
-            $reponse  = $this->connexion->prepare($requette);
-            $reponse->execute();
+        $requette = "select * FROM `produit`;";
+        $reponse  = $this->connexion->prepare($requette);
+        $reponse->execute();
 
-            $categorie = array();
+        $categorie = array();
 
-            while ($donnees = $reponse->fetch())
-            {
-                $categorie[] = new Produit(
-                    $donnees["id_prod"],
-                    $donnees["nom_prod"],
-                    $donnees["composant_prod"],
-                    $donnees["prix_prod"],
-                    $donnees["id_entreprise_produit"]);
-            }
+        while ($donnees = $reponse->fetch())
+        {
+            $categorie[] = new Produit(
+                $donnees["id_prod"],
+                $donnees["nom_prod"],
+                $donnees["composant_prod"],
+                $donnees["prix_prod"],
+                $donnees["id_entreprise_produit"]);
+        }
 
-            return $categorie;
+        $requette = null;
+        $reponse = null;
+
+        return $categorie;
     }
     /**
     * @param Nom String
     * @return Produit || Boolean
     */
-    public function getSelect($nom)
+    public function getSelect($id)
     {
-        $requette = "select * FROM `produit` WHERE id_prod=".$nom.";";
+        $requette = "select * FROM `produit` WHERE id_prod=".$id.";";
         $reponse  = $this->connexion->prepare($requette);
         $reponse->execute();
             
@@ -70,7 +73,6 @@ class ManagerProduit
         {
             while ($donnees = $reponse->fetch())
             {
-
                 $produit = new Produit(
                     $donnees["id_prod"],
                         $donnees["nom_prod"],
@@ -84,6 +86,10 @@ class ManagerProduit
             {
                 $produit = false;
             }
+
+        $requette = null;
+        $reponse = null;
+
         return $produit;
     }
 
@@ -115,26 +121,28 @@ class ManagerProduit
             {
                 $produit = false;
             }
+
+        $requette = null;
+        $reponse = null;
+
         return $produit;
     }
 
     /**
-    * @param Produit Object
+    * @param Produit $produit Class Produit
     * @return boolean
     */
     public function insert($produit)
     {
-        //require_once "../model/manager/man-produit.php";
-        $verf = $this->AlreadyExist('`nom_prod` = "'.$produit->getNom().'";');
-        var_dump($verf);
+        $verf = $this->AlreadyExist('`nom_prod` = "'.$produit->getName().'";');
+
         if(!$verf)
         {
-            echo "<br>HOY";
             $requette = "INSERT INTO `produit`(`nom_prod`, `composant_prod`, `prix_prod`, `id_entreprise_produit`) 
             VALUES (
-                '".$produit->getNom()."',
+                '".$produit->getName()."',
                 '".$produit->getComposant()."',
-                ".$produit->getPrix().",
+                ".$produit->getPrice().",
                 ".$produit->getIdRelations().")";
             $reponse  = $this->connexion->prepare($requette);
             if($reponse->execute())
@@ -143,7 +151,7 @@ class ManagerProduit
                 return false;
         }else
         {
-            return "Already exist";
+            return 'Already exist';
         }
     }
 
@@ -161,6 +169,9 @@ class ManagerProduit
         `id_entreprise_produit`=[value-5]";
         $reponse  = $this->connexion->prepare($requette);
         $reponse->execute();
+
+        $requette = null;
+        $reponse = null;
     }
 
     /**

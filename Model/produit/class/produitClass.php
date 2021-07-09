@@ -2,20 +2,21 @@
 
 namespace Model\ClassModel;
 
-Class Produit
+use JsonSerializable;
+Class Produit implements JsonSerializable
 {
     protected $id;
-    protected $nom;
+    protected $name;
     protected $composant;
-    protected $prix;
+    protected $price;
     protected $id_entreprise_relation;
 
-    public function __construct($id,$nom,$composant,$prix,$id_entreprise_relation)
+    public function __construct($id,$name,$composant,$price,$id_entreprise_relation)
     {
         $this->setId($id);
-        $this->setNom($nom);
+        $this->setNom($name);
         $this->setComposant($composant);
-        $this->setPrix($prix);
+        $this->setPrice($price);
         $this->setIdRelations($id_entreprise_relation);
     }
 
@@ -24,7 +25,7 @@ Class Produit
      */ 
     public function getId()
     {
-            return $this->id;
+        return $this->id;
     }
 
     /**
@@ -34,29 +35,25 @@ Class Produit
      */ 
     public function setId($id)
     {
-            $this->id = $id;
-
-            return $this;
+        return $this->id = $id;
     }
 
     /**
-     * Get the value of nom
+     * Get the value of name
      */ 
-    public function getNom()
+    public function getName()
     {
-            return $this->nom;
+        return $this->name;
     }
 
     /**
-     * Set the value of nom
+     * Set the value of name
      *
      * @return  self
      */ 
-    public function setNom($nom)
+    public function setNom($name)
     {
-            $this->nom = $nom;
-
-            return $this;
+        return $this->name = $name;
     }
 
     /**
@@ -64,7 +61,7 @@ Class Produit
      */ 
     public function getComposant()
     {
-            return $this->composant;
+        return $this->composant;
     }
 
     /**
@@ -74,29 +71,25 @@ Class Produit
      */ 
     public function setComposant($composant)
     {
-            $this->composant = $composant;
-
-            return $this;
+        return $this->composant = $composant;
     }
 
     /**
-     * Get the value of prix
+     * Get the value of price
      */ 
-    public function getPrix()
+    public function getPrice()
     {
-            return $this->prix;
+        return $this->price;
     }
 
     /**
-     * Set the value of prix
+     * Set the value of price
      *
      * @return  self
      */ 
-    public function setPrix($prix)
+    public function setPrice($price)
     {
-            $this->prix = $prix;
-
-            return $this;
+        return $this->price = $price;
     }
 
     /**
@@ -104,7 +97,7 @@ Class Produit
      */ 
     public function getIdRelations()
     {
-            return $this->id_entreprise_relation;
+        return $this->id_entreprise_relation;
     }
 
     /**
@@ -114,8 +107,26 @@ Class Produit
      */ 
     public function setIdRelations($id_entreprise_relation)
     {
-            $this->id_entreprise_relation = $id_entreprise_relation;
+        return $this->id_entreprise_relation = $id_entreprise_relation;
+    }
 
-            return $this;
+    public function jsonToObject($json)
+    {
+        $this->setNom($json['name']);
+        $this->setComposant($json['composant']);
+        $this->setPrice($json['price']);
+        $this->setIdRelations($json['relations']);
+    }
+
+    public function jsonSerialize()
+    {
+        return 
+        [
+            'id'   => $this->getId(),
+            'name' => $this->getName(),
+            'composant' => $this->getComposant(),
+            'price' => $this->getPrice(),
+            'relations' => $this->getIdRelations()
+        ];
     }
 }  

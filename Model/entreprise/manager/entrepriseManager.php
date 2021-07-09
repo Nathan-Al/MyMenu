@@ -1,5 +1,4 @@
 <?php
-require "../model/class/entreprise.php"; 
 
 namespace Model\ManagerModel;
 
@@ -10,7 +9,6 @@ class ManagerEntreprise
     private $connexion;
     public $entreprise;
     public $id;
-    public $nom;
 
     public function __construct($db){
         $this->connexion = $db;
@@ -18,29 +16,38 @@ class ManagerEntreprise
 
     public function getAll()
     {
-        $requette = "select * FROM `entreprise` ;";
+        $requette = "select * FROM `entreprise`;";
         $reponse  = $this->connexion->prepare($requette);
         $reponse->execute();
 
-        $categorie = array();
+        $entreprise = array();
 
         while ($donnees = $reponse->fetch())
         {
-            $categorie[] = new Entreprise($donnees["id_entre"],$donnees["nom_entre"],
-            $donnees["horaire_entre"],$donnees["localisation_entre"],$donnees["gpsX_entre"],
-            $donnees["gps_entre"],$donnees["siren"]);
+            $entreprise[] = new Entreprise(
+                $donnees["id_entre"],
+                $donnees["nom_entre"],
+                $donnees["horaire_entre"],
+                $donnees["localisation_entre"],
+                $donnees["gpsX_entre"],
+                $donnees["gpsY_entre"],
+                $donnees["siren"]
+            );
         }
 
-        return $categorie;
+        $requette = null;
+        $reponse = null;
+
+        return $entreprise;
     }
 
     /**
      * @param String
      * @return Array
      */
-    public function getSelect($nom)
+    public function getSelect($id)
     {
-        $requette = "select * FROM `entreprise` WHERE nom_entre=".$nom.";";
+        $requette = "select * FROM `entreprise` WHERE id_entre=".$id.";";
         $reponse  = $this->connexion->prepare($requette);
         $reponse->execute();
         
@@ -62,6 +69,9 @@ class ManagerEntreprise
         {
             $entreprise = false;
         }
+
+        $requette = null;
+        $reponse = null;
 
         return $entreprise;
     }
@@ -96,13 +106,12 @@ class ManagerEntreprise
         $requette = "INSERT INTO `entreprise`(`nom_entre`, `horaire_entre`, `localisation_entre`, 
         `gpsX_entre`, `gpsY_entre`, `siren`) 
         VALUES (
-            `".$entreprise->getNom()."`,
-            `".$entreprise->getHoraore()."`,
-            `".$entreprise->getLocalisation()."`,
-            `".$entreprise->getGpsX()."`,
-            `".$entreprise->getGpsY()."`,
-            `".$entreprise->getSiren()."`,
-        );";
+            '".$entreprise->getNom()."',
+            '".$entreprise->getHoraire()."',
+            '".$entreprise->getLocalisation()."',
+            '".$entreprise->getGpsX()."',
+            '".$entreprise->getGpsY()."',
+            '".$entreprise->getSiren()."')";
         $reponse  = $this->connexion->prepare($requette);
         if($reponse->execute())
             return true;

@@ -51,7 +51,7 @@
                 "jwt",
                 "php"
             ],
-            "install-path": "../firebase/php-jwt"
+            "install-path": "../../../mymenu/vendor/firebase/php-jwt"
         }
     ],
     "dev": true,

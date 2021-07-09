@@ -1,9 +1,18 @@
 RewriteEngine On # Activer le module Rewrite
-Options +FollowSymlinks
+#Options +FollowSymlinks
 #RewriteBase /project/ApiRest/
-#RewriteRule ^test/([a-zA-Z]+)$ tools/test.php?name_ent=$1
-RewriteRule ^ask/([a-z]+)/([a-z]+)/([a-zA-Z\ 1-99999]+)$ index.php?page=$1&action=$2&element=$3
-RewriteRule ^ask/compte/([a-z]+)$ index.php?action=$1
+#RewriteRule ^test/([a-zA-Z]+)$ tests/test.php?name_ent=$1
+RewriteRule ^ask/([a-zA-Z]+)$ index.php?entity=$1
+RewriteRule ^ask/([a-z]+)/([a-zA-Z\ 1-99999]+)$ index.php?entity=$1&element=$2
+RewriteRule ^add/([a-z]+)$ index.php?entity=$1
+#RewriteRule ^ask/compte/([a-z]+)$ index.php?action=$1
+#RewriteRule ^ask index.php
 
-ErrorDocument 404 /project/ApiRest/error/index.php index.php?404
+#ErrorDocument 404 /project/ApiRest/error/index.php index.php?404
 #RewriteRule (https?:\/\/|wwww\.)[a-zA-Z0-9-_\.\/\?=&]+
+
+<Files ~ "^.*\.([Hh][Tt]|[Ii][Nn][Cc])">
+    Order allow,deny
+    Deny from all
+    Satisfy All
+</Files>
