@@ -41,3 +41,5 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+# Node module
+/node_modules/*
