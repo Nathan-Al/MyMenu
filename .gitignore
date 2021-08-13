@@ -71,3 +71,6 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Heorku
+'/\/app\/(Config|tmp)/d'
