@@ -2,7 +2,6 @@
 //- listeRestaurants
 .liste_restaurants
   slot
-
 </template>
 
 <script lang="ts">
