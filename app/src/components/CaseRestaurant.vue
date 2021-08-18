@@ -5,7 +5,6 @@
   .adresse
     p.text-important Nom du restaurant
     p.text-pale Adresse du restaurant
-
 </template>
 
 <script lang="ts">
