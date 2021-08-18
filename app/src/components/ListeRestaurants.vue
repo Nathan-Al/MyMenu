@@ -1,7 +1,7 @@
 <template lang="pug">
 //- listeRestaurants
 .liste_restaurants
-    slot
+  slot
 
 </template>
 
