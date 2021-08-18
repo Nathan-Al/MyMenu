@@ -1,7 +1,6 @@
-<template>
-  <div class="home">
-    <DropdownMenu></DropdownMenu>
-  </div>
+<template lang="pug">
+.home
+  DropdownMenu
 </template>
 
 <script lang="ts">
