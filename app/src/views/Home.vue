@@ -12,5 +12,6 @@ import DropdownMenu from '@/components/DropdownMenu.vue' // @ is an alias to /sr
     DropdownMenu
   }
 })
+
 export default class Home extends Vue {}
 </script>
