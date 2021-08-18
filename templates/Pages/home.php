@@ -18,7 +18,6 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
 use Cake\Error\Debugger;
-use Cake\Http\Exception\NotFoundException;
 
 $this->disableAutoLayout();
 
@@ -40,12 +39,6 @@ $checkConnection = function (string $name) {
 
     return compact('connected', 'error');
 };
-
-if (!Configure::read('debug')) :
-    throw new NotFoundException(
-        'Please replace templates/Pages/home.php with your own version or re-enable debug mode.'
-    );
-endif;
 
 $cakeDescription = 'CakePHP: the rapid development PHP framework';
 ?>

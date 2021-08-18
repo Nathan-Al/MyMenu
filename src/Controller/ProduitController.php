@@ -3,29 +3,25 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\ORM\TableRegistry;
-use Cake\Datasource\ConnectionManager;
 
 // src/Controller/ProduitController.php
 class ProduitController extends AppController
 {
     /**
      * Read : only use get actions to read the bdd
-     * 
-     * @param int $id id
      *
+     * @param int $id id
      * @return array
      */
     public function read($id): array
     {
+        $this->loadModel('Produit');
         $datas = null;
 
         if ($id != null) {
-            $produit = TableRegistry::getTableLocator()->get('produit');
-            $query = $produit->find()->where(['id_prod' => $id]);
+            $query = $this->Produit->find()->where(['id_prod' => $id]);
         } else {
-            $produit = TableRegistry::getTableLocator()->get('produit');
-            $query = $produit->find();
+            $query = $this->Produit->find()->all();
         }
 
         foreach ($query as $row) {
@@ -41,27 +37,26 @@ class ProduitController extends AppController
 
     /**
      * insert : only use post actions to insert in bdd
-     * 
-     * @param \Cake\Http\ServerRequest $requete requete
      *
+     * @param \Cake\Http\ServerRequest $requete requete
      * @return array
      */
     public function insert($requete): array
     {
-        $produitTable = TableRegistry::getTableLocator()->get('produit');
+        $this->loadModel('Produit');
 
-        $exist = $produitTable->exists(['id_entreprise_produit' => $requete['relation'], 'nom' => $requete['nom']]);
+        $exist = $this->Produit->exists(['id_entreprise_produit' => $requete['relation'], 'nom' => $requete['nom']]);
 
         if (!$exist) {
             $produit = [
-                'nom' => $requete['nom!'],
+                'nom' => $requete['nom'],
                 'composant' => $requete['component'],
                 'prix' => $requete['price'],
                 'id_entreprise_produit' => $requete['relation'],
             ];
-            $entity = $produitTable->newEntity($produit);
-    
-            if ($produitTable->save($entity)) {
+            $entity = $this->Produit->newEntity($produit);
+
+            if ($this->Produit->save($entity)) {
                 return $produit;
             }
         } else {
@@ -73,18 +68,18 @@ class ProduitController extends AppController
 
     /**
      * update : only use put actions to update in bdd
-     * 
-     * @param \Cake\Http\ServerRequest $requete requete
      *
+     * @param \Cake\Http\ServerRequest $requete requete
+     * @param int $id id
      * @return array
      */
     public function update($requete, $id): array
     {
         $datas = null;
 
-        $produitTable = TableRegistry::getTableLocator()->get('produit');
+        $this->loadModel('Produit');
 
-        $produit = $produitTable->get($id);
+        $produit = $this->Produit->get($id);
 
         foreach ($requete as $index => $row) {
             if ($index != 'id') {
@@ -93,7 +88,7 @@ class ProduitController extends AppController
             }
         }
 
-        if ($produitTable->save($produit)) {
+        if ($this->Produit->save($produit)) {
             return $datas;
         } else {
             return ['Impossible to update'];
@@ -101,18 +96,17 @@ class ProduitController extends AppController
     }
 
     /**
-     * update : only use delete actions to delete in bdd
-     * 
-     * @param \Cake\Http\ServerRequest $requete requete
+     * delete : only use delete actions to delete in bdd
      *
+     * @param int $id id
      * @return array
      */
     public function delete($id): array
     {
-        var_dump($id);
-        $connection = ConnectionManager::get('default');
-        $connection->delete('produit', ['id' => $id]);
+        $this->loadModel('Produit');
+        $entity = $this->Produit->get($id);
+        $result = $this->Produit->delete($entity);
 
-        return ['Ok'];
+        return [$result];
     }
 }
