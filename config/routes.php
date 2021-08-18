@@ -43,35 +43,56 @@ use Cake\Routing\RouteBuilder;
  */
 /** @var \Cake\Routing\RouteBuilder $routes */
 $routes->setRouteClass(DashedRoute::class);
+$routes->setExtensions(['json']);
+$routes->resources('Recipes');
 
-$routes->scope('/', function (RouteBuilder $builder) {
-    /*
-     * Here, we are connecting '/' (base path) to a controller called 'Pages',
-     * its action called 'display', and we pass a param to select the view file
-     * to use (in this case, templates/Pages/home.php)...
-     */
-    $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+// $routes->scope('/', function (RouteBuilder $builder) {
+//     /*
+//      * Here, we are connecting '/' (base path) to a controller called 'Pages',
+//      * its action called 'display', and we pass a param to select the view file
+//      * to use (in this case, templates/Pages/home.php)...
+//      */
+//     $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
-    /*
-     * ...and connect the rest of 'Pages' controller's URLs.
-     */
-    $builder->connect('/pages/*', 'Pages::display');
+//     /*
+//      * ...and connect the rest of 'Pages' controller's URLs.
+//      */
+//     $builder->connect('/pages/*', 'Pages::display');
 
-    /*
-     * Connect catchall routes for all controllers.
-     *
-     * The `fallbacks` method is a shortcut for
-     *
-     * ```
-     * $builder->connect('/:controller', ['action' => 'index']);
-     * $builder->connect('/:controller/:action/*', []);
-     * ```
-     *
-     * You can remove these routes once you've connected the
-     * routes you want in your application.
-     */
-    $builder->fallbacks();
-});
+//     $builder->connect('/ask/produit/{id}', ['controller' => 'produit', 'action' => 'view']);
+
+//     /*
+//      * Connect catchall routes for all controllers.
+//      *
+//      * The `fallbacks` method is a shortcut for
+//      *
+//      * ```
+//      * $builder->connect('/:controller', ['action' => 'index']);
+//      * $builder->connect('/:controller/:action/*', []);
+//      * ```
+//      *
+//      * You can remove these routes once you've connected the
+//      * routes you want in your application.
+//      */
+//     $builder->fallbacks();
+// });
+$routes->get('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+
+$routes->get('/ask/{entity}/{id}', ['controller' => 'Index', 'action' => 'read'], 'index:read');
+
+$routes->get('/ask/{entity}', ['controller' => 'Index', 'action' => 'read'], 'index:readAll');
+
+$routes->post('/add/{entity}', ['controller' => 'Index', 'action' => 'add'], 'index:add');
+
+$routes->put('/upd/{entity}/{id}', ['controller' => 'Index', 'action' => 'update'], 'index:update');
+
+$routes->delete('/del/{entity}/{id}', ['controller' => 'Index', 'action' => 'delete'], 'index:delete');
+
+// $routes->scope('/ask', function (RouteBuilder $builder) {
+//     $builder->connect('produit/{id}', ['controller' => 'produit', 'action' => 'view']);
+
+//     $builder->connect('entreprise/{id}', ['controller' => 'entreprise', 'action' => 'view']);
+// });
 
 /*
  * If you need a different set of middleware or none at all,
