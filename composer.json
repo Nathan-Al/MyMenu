@@ -38,6 +38,7 @@
     "scripts": {
         "post-install-cmd": "App\\Console\\Installer::postInstall",
         "post-create-project-cmd": "App\\Console\\Installer::postInstall",
+        "install-dependance": "install.bat",
         "check": [
             "@test",
             "@cs-check"
