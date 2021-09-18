@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use Cake\ORM\TableRegistry;
-use Cake\Datasource\ConnectionManager;
 
 // src/Controller/EntrepriseController.php
 class EntrepriseController extends AppController
@@ -17,15 +15,13 @@ class EntrepriseController extends AppController
      */
     public function read($id): array
     {
-        $entreprise = null;
+        $this->loadModel('Entreprise');
         $query = null;
 
         if ($id != null) {
-            $entreprise = TableRegistry::getTableLocator()->get('entreprise');
-            $query = $entreprise->find()->where(['id_entre' => $id]);
+            $query = $this->Entreprise->find()->where(['id_entre' => $id]);
         } else {
-            $entreprise = TableRegistry::getTableLocator()->get('entreprise');
-            $query = $entreprise->find();
+            $query = $this->Entreprise->find();
         }
 
         foreach ($query as $row) {
@@ -45,15 +41,15 @@ class EntrepriseController extends AppController
 
     /**
      * insert : only use post actions to insert in bdd
-     * 
+     *
      * @param \Cake\Http\ServerRequest $requete requete
      * @return array
      */
     public function insert($requete): array
     {
-        $entrepriseTable = TableRegistry::getTableLocator()->get('entreprise');
+        $this->loadModel('Entreprise');
 
-        $exist = $entrepriseTable->exists(['siren' => $requete['siren']]);
+        $exist = $this->Entreprise->exists(['siren' => $requete['siren']]);
 
         if (!$exist) {
             $entreprise = [
@@ -64,8 +60,8 @@ class EntrepriseController extends AppController
                 'gpsy' => $requete['gpsy'],
                 'siren' => $requete['siren'],
             ];
-            $entity = $entrepriseTable->newEntity($entreprise);
-            if ($entrepriseTable->save($entity)) {
+            $entity = $this->Entreprise->newEntity($entreprise);
+            if ($this->Entreprise->save($entity)) {
                 return $entreprise;
             }
         } else {
@@ -79,16 +75,16 @@ class EntrepriseController extends AppController
      * update : only use put actions to update in bdd
      *
      * @param \Cake\Http\ServerRequest $requete requete
-     *
+     * @param int $id id
      * @return array
      */
     public function update($requete, $id): array
     {
         $datas = null;
 
-        $entrepriseTable = TableRegistry::getTableLocator()->get('entreprise');
+        $this->loadModel('Entreprise');
 
-        $entreprise = $entrepriseTable->get($id);
+        $entreprise = $this->Entreprise->get($id);
 
         foreach ($requete as $index => $row) {
             if ($index != 'id') {
@@ -97,7 +93,7 @@ class EntrepriseController extends AppController
             }
         }
 
-        if ($entrepriseTable->save($entreprise)) {
+        if ($this->Entreprise->save($entreprise)) {
             return $datas;
         } else {
             return ['Impossible to update'];
@@ -107,15 +103,15 @@ class EntrepriseController extends AppController
     /**
      * update : only use delete actions to delete in bdd
      *
-     * @param \Cake\Http\ServerRequest $requete requete
-     *
+     * @param int $id id
      * @return array
      */
     public function delete($id): array
     {
-        $connection = ConnectionManager::get('default');
-        $connection->delete('entreprise', ['id' => $id]);
+        $this->loadModel('Entreprise');
+        $entity = $this->Produit->get($id);
+        $result = $this->Produit->delete($entity);
 
-        return ['Ok'];
+        return [$result];
     }
 }

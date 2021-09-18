@@ -34,9 +34,8 @@ class IndexController extends AppController
         }
 
         $this->set('response', $datas);
-        $this->set('_jsonOptions', JSON_FORCE_OBJECT);
-        $this->set('_serialize', ['response']);
         $this->viewBuilder()->setOption('serialize', ['response']);
+        $this->viewBuilder()->setOption('jsonOptions', JSON_FORCE_OBJECT);
     }
 
     /**
@@ -73,8 +72,8 @@ class IndexController extends AppController
         }
 
         $this->set('response', $datas);
-        $this->set('_jsonOptions', JSON_FORCE_OBJECT);
-        $this->set('_serialize', ['response']);
+        $this->viewBuilder()->setOption('serialize', ['response']);
+        $this->viewBuilder()->setOption('jsonOptions', JSON_FORCE_OBJECT);
     }
 
     /**
@@ -112,8 +111,8 @@ class IndexController extends AppController
         }
 
         $this->set('response', $datas);
-        $this->set('_jsonOptions', JSON_FORCE_OBJECT);
-        $this->set('_serialize', ['response']);
+        $this->viewBuilder()->setOption('serialize', ['response']);
+        $this->viewBuilder()->setOption('jsonOptions', JSON_FORCE_OBJECT);
     }
 
     /**
@@ -130,25 +129,23 @@ class IndexController extends AppController
         $id = $this->request->getParam('id');
         $datas = null;
 
-        if (isset($this->request->getData()['data'])) {
-            if (in_array($entity, $entityExist)) {
-                switch ($entity) {
-                    case 'produit':
-                        $produit = new ProduitController();
-                        $datas = $produit->delete($id);
+        if (in_array($entity, $entityExist)) {
+            switch ($entity) {
+                case 'produit':
+                    $produit = new ProduitController();
+                    $datas = $produit->delete($id);
 
-                        break;
-                    case 'entreprise':
-                        $entrerprise = new EntrepriseController();
-                        $datas = $entrerprise->delete($id);
+                    break;
+                case 'entreprise':
+                    $entrerprise = new EntrepriseController();
+                    $datas = $entrerprise->delete($id);
 
-                        break;
-                }
+                    break;
             }
         }
 
         $this->set('response', $datas);
-        $this->set('_jsonOptions', JSON_FORCE_OBJECT);
-        $this->set('_serialize', ['response']);
+        $this->viewBuilder()->setOption('serialize', ['response']);
+        $this->viewBuilder()->setOption('jsonOptions', JSON_FORCE_OBJECT);
     }
 }
