@@ -10,7 +10,7 @@ use Cake\Error\Debugger;
 
 $this->layout = 'error';
 
-//if (Configure::read('debug')) :
+if (Configure::read('debug')) :
     $this->layout = 'dev_error';
 
     $this->assign('title', $message);
@@ -36,7 +36,7 @@ $this->layout = 'error';
     echo $this->element('auto_table_warning');
 
     $this->end();
-//endif;
+endif;
 ?>
 <h2><?= __d('cake', 'An Internal Error Has Occurred.') ?></h2>
 <p class="error">
