@@ -29,6 +29,10 @@ class ProduitController extends AppController
                 'id' => $row->id_prod,
                 'nom' => $row->nom,
                 'composant' => $row->composant,
+                'prix' => $row->prix,
+                'created' => $row->created,
+                'modified' => $row->modified,
+                'entreprise' => $row->id_entreprise_produit,
             ];
         }
 
@@ -44,23 +48,30 @@ class ProduitController extends AppController
     public function insert($requete): array
     {
         $this->loadModel('Produit');
+        $result = [];
 
-        $exist = $this->Produit->exists(['id_entreprise_produit' => $requete['relation'], 'nom' => $requete['nom']]);
+        foreach ($requete as $value) {
+            $exist = $this->Produit->exists(['id_entreprise_produit' => $value['relation'], 'nom' => $value['nom']]);
 
-        if (!$exist) {
-            $produit = [
-                'nom' => $requete['nom'],
-                'composant' => $requete['component'],
-                'prix' => $requete['price'],
-                'id_entreprise_produit' => $requete['relation'],
-            ];
-            $entity = $this->Produit->newEntity($produit);
+            if (!$exist) {
+                $produit = [
+                'nom' => $value['nom'],
+                'composant' => $value['component'],
+                'prix' => $value['price'],
+                'id_entreprise_produit' => $value['relation'],
+                ];
+                $entity = $this->Produit->newEntity($produit);
 
-            if ($this->Produit->save($entity)) {
-                return $produit;
+                if ($this->Produit->save($entity)) {
+                    $result[] = $produit;
+                }
+            } else {
+                $result[] = ['Already exist'];
             }
-        } else {
-            return ['Already exist'];
+        }
+
+        if (!empty($result)) {
+            return $result;
         }
 
         return ['Impossible to insert'];

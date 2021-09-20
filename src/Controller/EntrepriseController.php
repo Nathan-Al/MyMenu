@@ -33,6 +33,8 @@ class EntrepriseController extends AppController
                 'gpsX' => $row->gpsx,
                 'gpsY' => $row->gpsy,
                 'siren' => $row->siren,
+                'created' => $row->created,
+                'modified' => $row->modified,
             ];
         }
 
@@ -48,24 +50,31 @@ class EntrepriseController extends AppController
     public function insert($requete): array
     {
         $this->loadModel('Entreprise');
+        $result = [];
 
-        $exist = $this->Entreprise->exists(['siren' => $requete['siren']]);
+        foreach ($requete as $value) {
+            $exist = $this->Entreprise->exists(['siren' => $value['siren']]);
 
-        if (!$exist) {
-            $entreprise = [
-                'nom' => $requete['nom'],
-                'horaire' => $requete['horaire'],
-                'localisation' => $requete['address'],
-                'gpsx' => $requete['gpsx'],
-                'gpsy' => $requete['gpsy'],
-                'siren' => $requete['siren'],
-            ];
-            $entity = $this->Entreprise->newEntity($entreprise);
-            if ($this->Entreprise->save($entity)) {
-                return $entreprise;
+            if (!$exist) {
+                $entreprise = [
+                    'nom' => $value['nom'],
+                    'horaire' => $value['horaire'],
+                    'localisation' => $value['address'],
+                    'gpsx' => $value['gpsx'],
+                    'gpsy' => $value['gpsy'],
+                    'siren' => $value['siren'],
+                ];
+                $entity = $this->Entreprise->newEntity($entreprise);
+                if ($this->Entreprise->save($entity)) {
+                    $result[] = $entreprise;
+                }
+            } else {
+                $result[] = ['Already exist'];
             }
-        } else {
-            return ['Already exist'];
+        }
+
+        if (!empty($result)) {
+            return $result;
         }
 
         return ['Impossible to insert'];
@@ -109,8 +118,8 @@ class EntrepriseController extends AppController
     public function delete($id): array
     {
         $this->loadModel('Entreprise');
-        $entity = $this->Produit->get($id);
-        $result = $this->Produit->delete($entity);
+        $entity = $this->Entreprise->get($id);
+        $result = $this->Entreprise->delete($entity);
 
         return [$result];
     }

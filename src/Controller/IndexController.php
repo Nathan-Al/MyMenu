@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-use App\Controller\ProduitController;
 
 // src/Controller/IndexController.php
 class IndexController extends AppController
@@ -15,13 +14,12 @@ class IndexController extends AppController
      */
     public function read()
     {
-        $this->viewBuilder()->setClassName('Json');
         $entity = $this->request->getParam('entity');
         $id = $this->request->getParam('id') ?? null;
         $datas = null;
 
         switch ($entity) {
-            case 'entreprise' :
+            case 'entreprise':
                 $entreprise = new EntrepriseController();
                 $datas = $entreprise->read($id);
                 break;
@@ -29,23 +27,27 @@ class IndexController extends AppController
                 $produit = new ProduitController();
                 $datas = $produit->read($id);
                 break;
+            case 'compte':
+                $compte = new CompteController();
+                $datas = $compte->read($id);
+                break;
             default:
                 break;
         }
 
         $this->set('response', $datas);
+        $this->viewBuilder()->setClassName('Json');
         $this->viewBuilder()->setOption('serialize', ['response']);
         $this->viewBuilder()->setOption('jsonOptions', JSON_FORCE_OBJECT);
     }
 
     /**
      * Add new data in the bdd
-     * 
+     *
      * @return void
      */
     public function add(): void
     {
-        $this->viewBuilder()->setClassName('Json');
         $entityExist = ['produit','entreprise'];
         $entity = $this->request->getParam('entity');
 
@@ -72,18 +74,18 @@ class IndexController extends AppController
         }
 
         $this->set('response', $datas);
+        $this->viewBuilder()->setClassName('Json');
         $this->viewBuilder()->setOption('serialize', ['response']);
         $this->viewBuilder()->setOption('jsonOptions', JSON_FORCE_OBJECT);
     }
 
     /**
      * Update datas in the bdd
-     * 
+     *
      * @return void
      */
     public function update()
     {
-        $this->viewBuilder()->setClassName('Json');
         $entityExist = ['produit','entreprise'];
         $entity = $this->request->getParam('entity');
         $id = $this->request->getParam('id');
@@ -111,19 +113,18 @@ class IndexController extends AppController
         }
 
         $this->set('response', $datas);
+        $this->viewBuilder()->setClassName('Json');
         $this->viewBuilder()->setOption('serialize', ['response']);
         $this->viewBuilder()->setOption('jsonOptions', JSON_FORCE_OBJECT);
     }
 
     /**
      * Delete datas in the bdd
-     * 
+     *
      * @return void
      */
     public function delete()
     {
-        $this->viewBuilder()->setClassName('Json');
-
         $entityExist = ['produit','entreprise'];
         $entity = $this->request->getParam('entity');
         $id = $this->request->getParam('id');
@@ -145,6 +146,28 @@ class IndexController extends AppController
         }
 
         $this->set('response', $datas);
+        $this->viewBuilder()->setClassName('Json');
+        $this->viewBuilder()->setOption('serialize', ['response']);
+        $this->viewBuilder()->setOption('jsonOptions', JSON_FORCE_OBJECT);
+    }
+
+    /**
+     * Delete datas in the bdd
+     *
+     * @return void
+     */
+    public function connect()
+    {
+        $datas = null;
+
+        if (isset($this->request->getData()['data'])) {
+            $requete = $this->request->getData()['data'];
+            $utilisateur = new UtilisateurController();
+            $datas = $utilisateur->connexion($requete);
+        }
+
+        $this->set('response', $datas);
+        $this->viewBuilder()->setClassName('Json');
         $this->viewBuilder()->setOption('serialize', ['response']);
         $this->viewBuilder()->setOption('jsonOptions', JSON_FORCE_OBJECT);
     }

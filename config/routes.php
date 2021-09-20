@@ -85,6 +85,8 @@ $routes->put('/upd/{entity}/{id}', ['controller' => 'Index', 'action' => 'update
 
 $routes->delete('/del/{entity}/{id}', ['controller' => 'Index', 'action' => 'delete'], 'index:delete');
 
+$routes->post('/utilisateur', ['controller' => 'Index', 'action' => 'connect'], 'index:connect');
+
 // $routes->scope('/ask', function (RouteBuilder $builder) {
 //     $builder->connect('produit/{id}', ['controller' => 'produit', 'action' => 'view']);
 
