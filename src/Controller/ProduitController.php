@@ -33,6 +33,7 @@ class ProduitController extends AppController
                 'created' => $row->created,
                 'modified' => $row->modified,
                 'entreprise' => $row->id_entreprise_produit,
+                'type' => $row->type,
             ];
         }
 
@@ -59,7 +60,9 @@ class ProduitController extends AppController
                 'composant' => $value['component'],
                 'prix' => $value['price'],
                 'id_entreprise_produit' => $value['relation'],
+                'type' => $value['type'],
                 ];
+
                 $entity = $this->Produit->newEntity($produit);
 
                 if ($this->Produit->save($entity)) {
