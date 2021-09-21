@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Cake\Core\Configure;
 use App\Controller\AppController;
 
 // src/Controller/IndexController.php
@@ -14,7 +15,8 @@ class IndexController extends AppController
      */
     public function read()
     {
-        $this->response = $this->response->cors($this->request)
+        if (Configure::read('debug')) {
+            $this->response = $this->response->cors($this->request)
             ->allowOrigin(['*'])
             ->allowMethods(['GET'])
             // ->allowHeaders(['X-CSRF-Token'])
@@ -22,6 +24,7 @@ class IndexController extends AppController
             // ->exposeHeaders(['Link'])
             ->maxAge(300)
             ->build();
+        }
 
         $entity = $this->request->getParam('entity');
         $id = $this->request->getParam('id') ?? null;
@@ -57,6 +60,17 @@ class IndexController extends AppController
      */
     public function add(): void
     {
+        if (Configure::read('debug')) {
+            $this->response = $this->response->cors($this->request)
+            ->allowOrigin(['*'])
+            ->allowMethods(['POST'])
+            // ->allowHeaders(['X-CSRF-Token'])
+            // ->allowCredentials()
+            // ->exposeHeaders(['Link'])
+            ->maxAge(300)
+            ->build();
+        }
+
         $entityExist = ['produit','entreprise'];
         $entity = $this->request->getParam('entity');
 
@@ -95,6 +109,17 @@ class IndexController extends AppController
      */
     public function update()
     {
+        if (Configure::read('debug')) {
+            $this->response = $this->response->cors($this->request)
+            ->allowOrigin(['*'])
+            ->allowMethods(['PUT'])
+            // ->allowHeaders(['X-CSRF-Token'])
+            // ->allowCredentials()
+            // ->exposeHeaders(['Link'])
+            ->maxAge(300)
+            ->build();
+        }
+
         $entityExist = ['produit','entreprise'];
         $entity = $this->request->getParam('entity');
         $id = $this->request->getParam('id');
@@ -134,6 +159,17 @@ class IndexController extends AppController
      */
     public function delete()
     {
+        if (Configure::read('debug')) {
+            $this->response = $this->response->cors($this->request)
+            ->allowOrigin(['*'])
+            ->allowMethods(['DELETE'])
+            // ->allowHeaders(['X-CSRF-Token'])
+            // ->allowCredentials()
+            // ->exposeHeaders(['Link'])
+            ->maxAge(300)
+            ->build();
+        }
+
         $entityExist = ['produit','entreprise'];
         $entity = $this->request->getParam('entity');
         $id = $this->request->getParam('id');
@@ -167,6 +203,17 @@ class IndexController extends AppController
      */
     public function connect()
     {
+        if (Configure::read('debug')) {
+            $this->response = $this->response->cors($this->request)
+            ->allowOrigin(['*'])
+            ->allowMethods(['POST'])
+            ->allowHeaders(['X-CSRF-Token'])
+            ->allowCredentials()
+            // ->exposeHeaders(['Link'])
+            ->maxAge(300)
+            ->build();
+        }
+
         $datas = null;
 
         if (isset($this->request->getData()['data'])) {
