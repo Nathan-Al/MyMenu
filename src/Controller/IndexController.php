@@ -14,6 +14,15 @@ class IndexController extends AppController
      */
     public function read()
     {
+        $this->response = $this->response->cors($this->request)
+            ->allowOrigin(['*'])
+            ->allowMethods(['GET'])
+            // ->allowHeaders(['X-CSRF-Token'])
+            // ->allowCredentials()
+            // ->exposeHeaders(['Link'])
+            ->maxAge(300)
+            ->build();
+
         $entity = $this->request->getParam('entity');
         $id = $this->request->getParam('id') ?? null;
         $datas = null;
