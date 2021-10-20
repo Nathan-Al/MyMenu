@@ -1,20 +1,25 @@
 <template>
-  <Header></Header>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
-  <Footer></Footer>
+  <main>
+    <SplashScreen/>
+    <Header/>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <router-view/>
+    <Footer/>
+  </main>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
-import Header from '@/components/Header/Header.vue' // @ is an alias to /src
-import Footer from '@/components/Footer/Footer.vue'
+import { Options, Vue } from 'vue-class-component';
+import SplashScreen from '@/components/Splashscreen.vue';
+import Header from '@/components/Header/Header.vue'; // @ is an alias to /src
+import Footer from '@/components/Footer/Footer.vue';
 
 @Options({
   components: {
+    SplashScreen,
     Header,
     Footer
   }
