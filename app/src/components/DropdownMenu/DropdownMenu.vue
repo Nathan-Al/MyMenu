@@ -1,16 +1,19 @@
-<template lang="pug">
-//- menuDeroulant
-.menu_deroulant
-  div
-    BandeauChoix
-  div
-    BandeauChoix.text-important.text-main
-    ListeRestaurants
-      CaseRestaurant
-      CaseRestaurant
-  div
-    BandeauChoix
-
+<template>
+  <div class=menu_deroulant>
+    <div>
+      <BandeauChoix/>
+    </div>
+    <div>
+      <BandeauChoix class="text-important text-main"/>
+      <ListeRestaurants>
+        <CaseRestaurant/>
+        <CaseRestaurant/>
+      </ListeRestaurants>
+    </div>
+    <div>
+      <BandeauChoix/>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">

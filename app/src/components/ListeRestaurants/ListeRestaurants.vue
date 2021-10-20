@@ -1,8 +1,7 @@
-<template lang="pug">
-//- listeRestaurants
-.liste_restaurants
-  slot
-
+<template>
+  <div class=liste_restaurants>
+    <slot></slot>
+  </div>
 </template>
 
 <script lang="ts">

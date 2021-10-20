@@ -1,11 +1,11 @@
-<template lang="pug">
-//- caseRestaurant
-.case_restaurant
-  .vignette.bg-main
-  .adresse
-    p.text-important Nom du restaurant
-    p.text-pale Adresse du restaurant
-
+<template>
+<div class=case_restaurant>
+  <div class="vignette bg-main"></div>
+  <div class=adresse>
+    <p class=text-important> Nom du restaurant </p>
+    <p class=text-pale> Adresse du restaurant </p>
+  </div>
+</div>
 </template>
 
 <script lang="ts">

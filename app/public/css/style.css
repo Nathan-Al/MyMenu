@@ -32,6 +32,9 @@ body {
 
 .vue:not(#splash) .content {
   padding-top: 50px;
+  max-width: 1000px;
+  min-height: 100vh;
+  margin: auto;
 }
 
 .vue .content .gradient, .vue .background .gradient {
@@ -41,11 +44,8 @@ body {
 }
 
 .vue .content {
-  margin: auto;
-  padding: 15px;
-  max-width: 1000px;
-  min-height: 100vh;
   position: relative;
+  padding: 15px;
 }
 
 .vue .content .retour {
@@ -58,11 +58,16 @@ body {
   inset: 0;
 }
 
-.vue#splash .content {
+.vue#splash {
   display: -ms-grid;
   display: grid;
   place-items: center;
-  position: absolute !important;
+  position: fixed;
+  inset: 0;
+  color: white;
+}
+.vue#splash .background {
+  position: absolute;
   inset: 0;
 }
 
@@ -203,7 +208,7 @@ input[type="text"] {
 }
 
 .menu_deroulant {
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
 }
