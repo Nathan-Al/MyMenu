@@ -12,10 +12,10 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import SplashScreen from '@/components/Splashscreen.vue';
-import Header from '@/components/Header/Header.vue'; // @ is an alias to /src
-import Footer from '@/components/Footer/Footer.vue';
+import { Options, Vue } from 'vue-class-component'
+import SplashScreen from '@/components/Splashscreen.vue'
+import Header from '@/components/Header/Header.vue' // @ is an alias to /src
+import Footer from '@/components/Footer/Footer.vue'
 
 @Options({
   components: {
