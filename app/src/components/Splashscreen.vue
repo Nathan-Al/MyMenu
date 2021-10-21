@@ -1,5 +1,5 @@
 <template>
-<div id="splash" class="vue ">
+<div v-if="splash" id="splash" class="vue" @click="hide()">
   <div class='background'>
     <div class="gradient"></div>
   </div>
@@ -9,3 +9,23 @@
   <span class="text-pale">Une petite faim ?</span>
 </div>
 </template>
+
+<script lang="ts">
+import { mapState, mapMutations } from 'vuex'
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'ListeRestaurants',
+  computed: {
+    ...mapState({
+      splash: 'splash'
+    })
+  },
+  methods: {
+    ...mapMutations({
+      hide: 'hideSplash' // attacher `this.add()` à `this.$store.commit('increment')`
+    })
+  }
+})
+
+</script>
