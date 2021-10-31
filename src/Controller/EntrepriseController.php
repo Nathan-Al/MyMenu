@@ -17,6 +17,7 @@ class EntrepriseController extends AppController
     {
         $this->loadModel('Entreprise');
         $query = null;
+        $datas = null;
 
         if ($id != null) {
             $query = $this->Entreprise->find()->where(['id_entre' => $id]);

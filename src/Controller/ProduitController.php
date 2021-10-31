@@ -16,6 +16,7 @@ class ProduitController extends AppController
     public function read($id): array
     {
         $this->loadModel('Produit');
+        $query = null;
         $datas = null;
 
         if ($id != null) {
