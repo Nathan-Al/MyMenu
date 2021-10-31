@@ -1,6 +1,6 @@
 <template>
 <div class=bandeau_choix>
-  <p> A-F </p>
+  <p> {{ value }} </p>
   <svg xmlns="http://www.w3.org/2000/svg" width="16"
     height="16"
     fill="currentColor"
@@ -20,6 +20,18 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'BandeauChoix'
+  name: 'BandeauChoix',
+  props: {
+    value: String
+  },
+  setup (props) {
+    return props.value
+  }
 })
 </script>
+
+<style lang="scss" scoped>
+  [open] .bandeau_choix > svg {
+    transform: rotate(90deg);
+  }
+</style>

@@ -1,7 +1,7 @@
 <template>
-  <Case :to="'/restaurant/'+data.id">
-    <template v-slot:title> {{ data.full_nom || data.nom }} </template>
-    {{ data.full_localisation || data.localisation }}
+  <Case :to="$route.path + '/dish-' + data.id">
+    <template v-slot:title> {{ data.name }} </template>
+    {{ data.price }}
   </Case>
 </template>
 
@@ -11,7 +11,7 @@ import Case from './Case.vue'
 
 export default defineComponent({
   components: { Case },
-  name: 'CaseRestaurant',
+  name: 'CaseDish',
   props: {
     data: Object
   },
