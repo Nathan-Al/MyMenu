@@ -1,3 +1,6 @@
+:first-letter {
+    text-transform: capitalize;
+}
 .bg-main {
   background-color: #53E38E;
 }
@@ -28,6 +31,8 @@ body {
 
 .vue {
   position: relative;
+  --gc1: transparent ;
+  --gc2: #000d;
 }
 
 .vue:not(#splash) .content {
@@ -146,7 +151,8 @@ input[type="text"] {
 }
 
 .select_slider {
-  padding: 20px 0;
+  padding: 10px 0;
+  margin: 10px 0;
 }
 
 .select_slider .restaurant_type {
@@ -235,4 +241,3 @@ input[type="text"] {
 .case_restaurant:hover {
   background-color: #c4c4c450;
 }
-/*# sourceMappingURL=styles.css.map */
