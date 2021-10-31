@@ -1,16 +1,14 @@
 import { createStore } from 'vuex'
+import state from './state'
+import mutations from './mutations'
+import actions from './actions'
+import modules from './modules'
+import getters from './getters'
 
 export default createStore({
-  state: {
-    splash: true
-  },
-  mutations: {
-    hideSplash (state) {
-      state.splash = false
-    }
-  },
-  actions: {
-  },
-  modules: {
-  }
+  state,
+  mutations,
+  actions,
+  modules,
+  getters
 })
