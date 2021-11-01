@@ -44,7 +44,7 @@ class Application extends BaseApplication
      */
     public function bootstrap(): void
     {
-        $this->addPlugin('AssetMix');
+        $this->addPlugin('Migrations');
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
@@ -64,6 +64,7 @@ class Application extends BaseApplication
          */
         if (Configure::read('debug')) {
             $this->addPlugin('DebugKit');
+            $this->addPlugin('CakephpFixtureFactories');
         }
 
         // Load more plugins here
@@ -77,6 +78,8 @@ class Application extends BaseApplication
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
+        $options = ['httponly' => false];
+        $csrf = new CsrfProtectionMiddleware($options);
         $middlewareQueue
             // Catch any exceptions in the lower layers,
             // and make an error page/response
@@ -98,13 +101,11 @@ class Application extends BaseApplication
             // Parse various types of encoded request bodies so that they are
             // available as array through $request->getData()
             // https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware
-            ->add(new BodyParserMiddleware())
+            ->add(new BodyParserMiddleware());
 
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // https://book.cakephp.org/4/en/controllers/middleware.html#cross-site-request-forgery-csrf-middleware
-            ->add(new CsrfProtectionMiddleware([
-                'httponly' => true,
-            ]));
+            //->add($csrf);
 
         return $middlewareQueue;
     }

@@ -44,6 +44,5 @@ $cakeDescription = 'MyMenu the reason why you always eat on time';
     </main>
     <footer>
     </footer>
-    <?= $this->AssetMix->script('app') ?>
 </body>
 </html>
