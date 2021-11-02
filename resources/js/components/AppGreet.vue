@@ -1,20 +1,21 @@
 <template>
   <div>
     {{ description }}
-      <div>
-    <ul v-if="posts && posts.length">
-      <li :key="post" v-for="post of posts">
-        <p><strong>{{post.title}}</strong></p>
-        <p>{{post.body}}</p>
-      </li>
-    </ul>
+    <div>
+      <h1>Appelle AXIOS</h1>
+      <ul v-if="posts && posts.length">
+        <li :key="post" v-for="post of posts">
+          <p><strong>{{post.title}}</strong></p>
+          <p>{{post.body}}</p>
+        </li>
+      </ul>
 
-    <ul v-if="errors && errors.length">
-      <li :key="error" v-for="error of errors">
-        {{error.message}}
-      </li>
-    </ul>
-  </div>
+      <ul v-if="errors && errors.length">
+        <li :key="error" v-for="error of errors">
+          {{error.message}}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 

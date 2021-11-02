@@ -1,3 +1,3 @@
-<div id="app">
-    <h1>Greetings</h1>
-</div>
+<main class="main" id="app">
+    
+</main>
