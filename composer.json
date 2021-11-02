@@ -16,6 +16,7 @@
     "require-dev": {
         "php": ">=7.4",
         "cakephp/bake": "^2.3",
+        "cakephp/repl": "^0.1",
         "cakephp/cakephp-codesniffer": "~4.2.0",
         "cakephp/debug_kit": "^4.4",
         "josegonzalez/dotenv": "^3.2",
