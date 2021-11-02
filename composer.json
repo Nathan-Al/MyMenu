@@ -45,7 +45,7 @@
     "scripts": {
         "post-install-cmd": "App\\Console\\Installer::postInstall",
         "post-create-project-cmd": "App\\Console\\Installer::postInstall",
-        "install-dependencies": "install.bat",
+        "install-dependencies": "serveurDp.sh",
         "check": [
             "@test",
             "@cs-check"
