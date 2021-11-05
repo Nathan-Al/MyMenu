@@ -40,8 +40,8 @@ class IndexController extends AppController
                 $datas = $produit->read($id);
                 break;
             case 'compte':
-                $compte = new CompteController();
-                $datas = $compte->read($id);
+                // $compte = new CompteController();
+                // $datas = $compte->read($id);
                 break;
             default:
                 break;
@@ -196,35 +196,38 @@ class IndexController extends AppController
         $this->viewBuilder()->setOption('jsonOptions', JSON_FORCE_OBJECT);
     }
 
-    /**
-     * Delete datas in the bdd
-     *
-     * @return void
-     */
-    public function connect()
-    {
-        if (Configure::read('debug')) {
-            $this->response = $this->response->cors($this->request)
-            ->allowOrigin(['*'])
-            ->allowMethods(['POST'])
-            ->allowHeaders(['X-CSRF-Token'])
-            ->allowCredentials()
-            // ->exposeHeaders(['Link'])
-            ->maxAge(300)
-            ->build();
-        }
+    // /**
+    //  * Delete datas in the bdd
+    //  *
+    //  * @return void
+    //  */
+    // public function connect()
+    // {
+    //     if (Configure::read('debug')) {
+    //         $this->response = $this->response->cors($this->request)
+    //         ->allowOrigin(['*'])
+    //         ->allowMethods(['POST'])
+    //         ->allowHeaders(['X-CSRF-Token'])
+    //         ->allowCredentials()
+    //         // ->exposeHeaders(['Link'])
+    //         ->maxAge(300)
+    //         ->build();
+    //     }
 
-        $datas = null;
+    //     $compte = new CompteController();
+    //     $compte->login();
 
-        if (isset($this->request->getData()['data'])) {
-            $requete = $this->request->getData()['data'];
-            $utilisateur = new UtilisateurController();
-            $datas = $utilisateur->connexion($requete);
-        }
+    //     // $datas = null;
 
-        $this->set('response', $datas);
-        $this->viewBuilder()->setClassName('Json');
-        $this->viewBuilder()->setOption('serialize', ['response']);
-        $this->viewBuilder()->setOption('jsonOptions', JSON_FORCE_OBJECT);
-    }
+    //     // if (isset($this->request->getData()['data'])) {
+    //     //     $requete = $this->request->getData()['data'];
+    //     //     $utilisateur = new UtilisateurController();
+    //     //     $datas = $utilisateur->connexion($requete);
+    //     // }
+
+    //     // $this->set('response', $datas);
+    //     // $this->viewBuilder()->setClassName('Json');
+    //     // $this->viewBuilder()->setOption('serialize', ['response']);
+    //     // $this->viewBuilder()->setOption('jsonOptions', JSON_FORCE_OBJECT);
+    // }
 }
