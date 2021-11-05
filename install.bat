@@ -1,3 +1,7 @@
+#!/bin/bash
+@ECHO OFF
+ECHO Lanchement des scripts d'Installation
 # Installation de cake PHP
 composer install
-# Installation de Vue JS
+# Installation des dépendance node
+npm i

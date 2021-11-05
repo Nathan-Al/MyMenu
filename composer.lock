@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2ef4a6b93d0e487bb4ef4007d7375f21",
+    "content-hash": "25032f5658efa3e49b60a3572a59c07e",
     "packages": [
         {
             "name": "cakephp/cakephp",
@@ -421,16 +421,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "2.1.10",
+            "version": "2.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "ea5f64d1a15c66942979b804c9fb3686be852ca0"
+                "reference": "ddc81bb4718747cc93330ccf832e6be8a6c1d015"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/ea5f64d1a15c66942979b804c9fb3686be852ca0",
-                "reference": "ea5f64d1a15c66942979b804c9fb3686be852ca0",
+                "url": "https://api.github.com/repos/composer/composer/zipball/ddc81bb4718747cc93330ccf832e6be8a6c1d015",
+                "reference": "ddc81bb4718747cc93330ccf832e6be8a6c1d015",
                 "shasum": ""
             },
             "require": {
@@ -499,7 +499,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/composer/issues",
-                "source": "https://github.com/composer/composer/tree/2.1.10"
+                "source": "https://github.com/composer/composer/tree/2.1.11"
             },
             "funding": [
                 {
@@ -515,7 +515,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-10-29T20:34:57+00:00"
+            "time": "2021-11-02T11:10:26+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -809,6 +809,68 @@
                 }
             ],
             "time": "2021-07-31T17:03:58+00:00"
+        },
+        {
+            "name": "ishanvyas22/asset-mix",
+            "version": "1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ishanvyas22/asset-mix.git",
+                "reference": "401592631a28b59af50b96734c36a6e0abbf42f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ishanvyas22/asset-mix/zipball/401592631a28b59af50b96734c36a6e0abbf42f5",
+                "reference": "401592631a28b59af50b96734c36a6e0abbf42f5",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "^4.0.0",
+                "ext-json": "*",
+                "ext-mbstring": "*"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "^4.2.0",
+                "phpstan/phpstan": "^0.12.32",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "AssetMix\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ishan Vyas",
+                    "homepage": "https://github.com/ishanvyas22",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Asset Mix plugin for CakePHP",
+            "homepage": "https://github.com/ishanvyas22/asset-mix",
+            "keywords": [
+                "assets",
+                "cakephp",
+                "cakephp-plugin",
+                "javascript",
+                "laravel-mix",
+                "less",
+                "minifier",
+                "sass"
+            ],
+            "support": {
+                "issues": "https://github.com/ishanvyas22/asset-mix/issues",
+                "source": "https://github.com/ishanvyas22/asset-mix"
+            },
+            "time": "2021-07-11T16:31:14+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
@@ -3340,6 +3402,63 @@
                 "source": "https://github.com/cakephp/cakephp-codesniffer"
             },
             "time": "2020-12-03T20:39:38+00:00"
+        },
+        {
+            "name": "cakephp/repl",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cakephp/repl.git",
+                "reference": "6aa25db799a3bd062101b36f42a1ff0995654a56"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/repl/zipball/6aa25db799a3bd062101b36f42a1ff0995654a56",
+                "reference": "6aa25db799a3bd062101b36f42a1ff0995654a56",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "^4.0",
+                "php": ">=7.2.0",
+                "psy/psysh": "@stable"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "^4.0",
+                "phpunit/phpunit": "^8.5 || ^9.3"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Cake\\Repl\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CakePHP Community",
+                    "homepage": "https://github.com/cakephp/repl/graphs/contributors"
+                }
+            ],
+            "description": "REPL plugin for CakePHP",
+            "homepage": "https://github.com/cakephp/repl",
+            "keywords": [
+                "REPL",
+                "cakephp"
+            ],
+            "support": {
+                "forum": "https://discourse.cakephp.org/",
+                "irc": "irc://irc.freenode.org/cakephp",
+                "issues": "https://github.com/cakephp/repl/issues",
+                "slack": "https://cakesf.herokuapp.com/",
+                "source": "https://github.com/cakephp/repl/tree/0.1.0"
+            },
+            "time": "2020-11-18T09:26:29+00:00"
         },
         {
             "name": "cakephp/twig-view",
@@ -6162,20 +6281,20 @@
         },
         {
             "name": "vierge-noire/cakephp-fixture-factories",
-            "version": "v2.4",
+            "version": "v2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vierge-noire/cakephp-fixture-factories.git",
-                "reference": "87d8eb48865f6d6848627bafa845b0529d676257"
+                "reference": "5458c91c1d140174b1aad34592c6ddd2f5805902"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vierge-noire/cakephp-fixture-factories/zipball/87d8eb48865f6d6848627bafa845b0529d676257",
-                "reference": "87d8eb48865f6d6848627bafa845b0529d676257",
+                "url": "https://api.github.com/repos/vierge-noire/cakephp-fixture-factories/zipball/5458c91c1d140174b1aad34592c6ddd2f5805902",
+                "reference": "5458c91c1d140174b1aad34592c6ddd2f5805902",
                 "shasum": ""
             },
             "require": {
-                "cakephp/cakephp": "^4.0",
+                "cakephp/orm": "^4.0",
                 "fakerphp/faker": "^1.15",
                 "php": ">=7.2",
                 "vierge-noire/cakephp-test-suite-light": "^2.1"
@@ -6187,7 +6306,8 @@
                 "josegonzalez/dotenv": "dev-master",
                 "phpstan/phpstan": "^0.12.48@dev",
                 "phpunit/phpunit": "^8.0",
-                "vierge-noire/cakephp-test-migrator": "^2.1"
+                "vierge-noire/cakephp-test-migrator": "^2.1",
+                "vimeo/psalm": "^4.0"
             },
             "type": "cakephp-plugin",
             "autoload": {
@@ -6218,9 +6338,9 @@
             ],
             "support": {
                 "issues": "https://github.com/vierge-noire/cakephp-fixture-factories/issues",
-                "source": "https://github.com/vierge-noire/cakephp-fixture-factories/tree/v2.4"
+                "source": "https://github.com/vierge-noire/cakephp-fixture-factories/tree/v2.5"
             },
-            "time": "2021-09-08T12:15:32+00:00"
+            "time": "2021-11-01T03:00:08+00:00"
         },
         {
             "name": "vierge-noire/cakephp-test-migrator",

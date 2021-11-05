@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "lib": ["es2015", "es2016", "dom"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es5",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["resources/*"],
+      "@components/*": ["resources/js/components/*"],
+      "@modules/*": ["resources/js/modules/*"]
+    },
+    "rootDirs": ["resources"]
+  },
+  "include": ["./resources/js/**/*", "./resources/js/**/*.vue"],
+  "exclude": ["./node_modules", "./bin", "./src", "./var", "./vendor", "./public"]
+}
