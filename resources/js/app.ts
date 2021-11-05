@@ -1,9 +1,8 @@
 import Vue from 'vue';
 import Axios from 'axios';
-import VueRouter, { Route, RouteRecord } from 'vue-router';
-
-import store from './store/index';
-import router from "./store/router.js";
+import './registerServiceWorker'
+import store from './store';
+import router from "./router";
 import App from "./App.vue";
 
 // window.axios = axios;
@@ -18,16 +17,12 @@ Axios.interceptors.request.use(function(config) {
 
   return config;
 });
+store.dispatch('get_restaurant')
 
-const app = new Vue({
+new Vue({
   name: "App",
   el: '#app',
   components: { App },
-  store: store,
-  router,
-  data() {
-    return {
-        title: "MyMenu" as String
-    };
-  }
+  store,
+  router
 });
